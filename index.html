@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מחשבון הנחה</title>
     <link rel="icon" type="image/png" href="calculator.png">
+    <title>מחשבון הנחה</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
             background-color: #f8f9fa;
+            direction: rtl;
         }
         .container {
             max-width: 350px;
@@ -30,6 +31,7 @@
             display: block;
             font-size: 16px;
             box-sizing: border-box;
+            text-align: right;
         }
         button {
             background-color: #007bff;
@@ -55,10 +57,12 @@
             font-weight: bold;
             display: block;
             margin-top: 10px;
+            text-align: right;
         }
     </style>
 </head>
 <body>
+    <img id="logo" src="logo.png">
     <div class="container">
         <h2>מחשבון אחוזי הנחה</h2>
         <input type="number" id="originalPrice" placeholder="מחיר לפני הנחה" oninput="calculateDiscount()">
