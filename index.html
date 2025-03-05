@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון הנחה</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 350px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>מחשבון אחוזי הנחה</h2>
+        <input type="number" id="originalPrice" placeholder="מחיר לפני הנחה" oninput="calculateDiscount()">
+        <input type="number" id="discountedPrice" placeholder="מחיר לאחר הנחה" oninput="calculateDiscount()">
+        <div class="result" id="result"></div>
+        <hr>
+        <label for="discountPercentage">אחוזי הנחה:</label>
+        <input type="number" id="discountPercentage" placeholder="אחוזי הנחה" oninput="updatePrices()">
+    </div>
+
+    <script>
+        function calculateDiscount() {
+            var originalPrice = parseFloat(document.getElementById("originalPrice").value);
+            var discountedPrice = parseFloat(document.getElementById("discountedPrice").value);
+
+            if (isNaN(originalPrice) || isNaN(discountedPrice) || originalPrice <= 0 || discountedPrice <= 0 || discountedPrice > originalPrice) {
+                document.getElementById("result").innerHTML = "אנא הזן ערכים תקינים";
+                return;
+            }
+
+            var discountPercentage = Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
+            document.getElementById("result").innerHTML = "ההנחה היא " + discountPercentage + "%";
+            document.getElementById("discountPercentage").value = discountPercentage;
+        }
+
+        function updatePrices() {
+            var originalPrice = parseFloat(document.getElementById("originalPrice").value);
+            var discountPercentage = parseFloat(document.getElementById("discountPercentage").value);
+
+            if (isNaN(originalPrice) || isNaN(discountPercentage) || originalPrice <= 0 || discountPercentage < 0 || discountPercentage > 100) {
+                return;
+            }
+
+            var discountedPrice = originalPrice * (1 - discountPercentage / 100);
+            document.getElementById("discountedPrice").value = discountedPrice.toFixed(2);
+            document.getElementById("result").innerHTML = "ההנחה היא " + Math.round(discountPercentage) + "%";
+        }
+    </script>
+</body>
+</html>
